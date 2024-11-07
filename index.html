@@ -38,18 +38,19 @@
   </head>
 
   <body>
-    <header>
-      <div class="container py-2">
-        <!-- title -->
-        <h1 class="fw-semibold text-center">ESTATE '24</h1>
-      </div>
-    </header>
-    <main>
-      <div class="container py-5">
-        <!-- cards -->
-        <div id="pinboard" class="row g-4">
-          <!-- card -->
-          <!--           
+    <div class="wrapper">
+      <header>
+        <div class="container py-2">
+          <!-- title -->
+          <h1 class="fw-semibold text-center">ESTATE '24</h1>
+        </div>
+      </header>
+      <main>
+        <div class="container py-5">
+          <!-- cards -->
+          <div id="pinboard" class="row g-4">
+            <!-- card -->
+            <!--           
           <div class="col-12 col-md-4">
             <div class="card w-100 rounded-0 m-auto" style="width: 18rem">
               <img
@@ -67,10 +68,17 @@
             </div>
           </div> 
           -->
-          <!--  -->
+            <!--  -->
+          </div>
+        </div>
+      </main>
+
+      <div id="overlay" class="pt-5 d-none">
+        <div class="container">
+          <button id="close-overlay" class="btn btn-success">Chiudi</button>
         </div>
       </div>
-    </main>
+    </div>
 
     <!-- BOOSTRAP JS -->
     <script

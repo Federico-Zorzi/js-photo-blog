@@ -1,4 +1,6 @@
 const pinboardEl = document.getElementById("pinboard");
+const overlay = document.getElementById("overlay");
+const closeOverlay = document.getElementById("close-overlay");
 
 /**
  *
@@ -25,16 +27,25 @@ fetch("https://jsonplaceholder.typicode.com/photos?_limit=6")
   .then((photos) => {
     console.log(photos);
 
+    // stampa delle cards
     photos.forEach((photo) => {
       pinboardEl.innerHTML += createCardPhoto(photo);
     });
 
-    const postCardsElHmiCollect = document.getElementsByClassName("card");
+    const postCardsEl = document.querySelectorAll("#pinboard .card");
+    console.log(postCardsEl);
 
-    const cardsHtmlEl = Array.prototype.slice.call(postCardsElHmiCollect);
-    console.log(cardsHtmlEl);
+    postCardsEl.forEach((card) => {
+      console.log(card);
 
-    cardsHtmlEl.forEach((card) => {
-      card.add;
+      // apertura schermata di overlay
+      card.addEventListener("click", () => {
+        overlay.classList.remove("d-none");
+      });
     });
   });
+
+// chiusura schermata di overlay
+closeOverlay.addEventListener("click", () => {
+  overlay.classList.add("d-none");
+});
