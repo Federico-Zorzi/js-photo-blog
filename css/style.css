@@ -1,5 +1,4 @@
 .wrapper {
-  min-height: 100vh;
   position: relative;
 }
 
@@ -12,16 +11,16 @@ header {
 }
 
 main {
+  min-height: 100vh;
+  height: 100%;
   background-image: url("../img/cork.png");
 }
 
-main .container {
-  height: 100%;
-
-  font-family: "Montserrat", serif;
+h1,
+.card-text {
+  font-family: "Edu TAS Beginner", cursive;
   font-optical-sizing: auto;
   font-style: normal;
-  font-style: italic;
 }
 
 h1 {
@@ -31,6 +30,10 @@ h1 {
 #pinboard .card {
   cursor: pointer;
   position: relative;
+}
+
+.card-text {
+  font-size: 1.2rem;
 }
 
 /* pin sulle card */
@@ -45,13 +48,17 @@ h1 {
 }
 
 #overlay {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   height: 100%;
+  width: 100%;
 
   position: absolute;
-  height: 100%;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+#overlay .container {
+  max-width: 600px;
 }

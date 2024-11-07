@@ -7,19 +7,18 @@ const closeOverlay = document.getElementById("close-overlay");
  * @param {object} photoEl inserire oggetto della foto per comporre la card
  * @returns
  */
-const createCardPhoto = (photoEl) => {
-  return `
-        <div class="col-12 col-md-4">
-            <div class="card h-100 w-100 rounded-0 m-auto" style="width: 18rem">
-              <img src="${photoEl.url}" class="card-img-top pt-3 px-3" alt="..." />
+const createCardPhoto = (photo) => {
+  return `       
+            <div class="card h-100 w-100 rounded-0 m-auto">
+              <img src="${photo.url}" class="card-img-top pt-3 px-3" alt="..." />
               <div class="card-body">
                 <p class="card-text">
-                  ${photoEl.title}
+                  ${photo.title}
                 </p>
               </div>
               <img src="./img/pin.svg" alt="pin" class="pin" />
             </div>
-          </div>`;
+          `;
 };
 
 fetch("https://jsonplaceholder.typicode.com/photos?_limit=6")
@@ -29,18 +28,24 @@ fetch("https://jsonplaceholder.typicode.com/photos?_limit=6")
 
     // stampa delle cards
     photos.forEach((photo) => {
-      pinboardEl.innerHTML += createCardPhoto(photo);
+      pinboardEl.innerHTML += `
+        <div class="col-12 col-md-4">
+          ${createCardPhoto(photo)}
+        </div>`;
     });
 
     const postCardsEl = document.querySelectorAll("#pinboard .card");
     console.log(postCardsEl);
 
-    postCardsEl.forEach((card) => {
-      console.log(card);
-
+    postCardsEl.forEach((cardNode, index) => {
       // apertura schermata di overlay
-      card.addEventListener("click", () => {
+      cardNode.addEventListener("click", () => {
+        const cardSelected = document.getElementById("card-selected");
+        cardSelected.innerHTML = ``;
         overlay.classList.remove("d-none");
+
+        // stampa card per visualizzarla nell'overlay
+        cardSelected.innerHTML = createCardPhoto(photos[index]);
       });
     });
   });

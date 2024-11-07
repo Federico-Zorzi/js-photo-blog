@@ -27,24 +27,27 @@
     /> -->
 
     <!-- GOOGLE FONTS -->
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Edu+TAS+Beginner:wght@400..700&family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
-    /> -->
+    />
 
     <link rel="stylesheet" href="./css/style.css" />
   </head>
 
   <body>
     <div class="wrapper">
+      <!-- HEADER -->
       <header>
         <div class="container py-2">
           <!-- title -->
           <h1 class="fw-semibold text-center">ESTATE '24</h1>
         </div>
       </header>
+
+      <!-- MAIN -->
       <main>
         <div class="container py-5">
           <!-- cards -->
@@ -73,9 +76,34 @@
         </div>
       </main>
 
-      <div id="overlay" class="pt-5 d-none">
+      <!-- OVERLAY -->
+      <div id="overlay" class="d-none">
         <div class="container">
-          <button id="close-overlay" class="btn btn-success">Chiudi</button>
+          <div class="row justify-content-center g-5 pt-5">
+            <!-- pulsante per chiudere l'overlay -->
+            <div class="col-auto">
+              <button
+                id="close-overlay"
+                class="m-auto btn btn-danger btn-outline-light"
+              >
+                Chiudi
+              </button>
+            </div>
+
+            <div class="w-100 d-block"></div>
+
+            <!-- generazione card selezionata tramite js -->
+            <div id="card-selected" class="col-auto">
+              <!--               
+              <div class="card w-100 rounded-0 m-auto" style="width: 18rem">
+                <img src="..." class="card-img-top pt-3 px-3" alt="..." />
+                <div class="card-body">
+                  <p class="card-text">testo di prova</p>
+                </div>
+                <img src="./img/pin.svg" alt="pin" class="pin" />
+              </div> -->
+            </div>
+          </div>
         </div>
       </div>
     </div>
