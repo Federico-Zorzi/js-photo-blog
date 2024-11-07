@@ -29,28 +29,49 @@ fetch("https://jsonplaceholder.typicode.com/photos?_limit=6")
     // stampa delle cards
     photos.forEach((photo) => {
       pinboardEl.innerHTML += `
-        <div class="col-12 col-md-4">
-          ${createCardPhoto(photo)}
-        </div>`;
+      <div class="col-12 col-md-4">
+      ${createCardPhoto(photo)}
+      </div>`;
     });
 
+    let selectedIndex = -1;
     const postCardsEl = document.querySelectorAll("#pinboard .card");
-    console.log(postCardsEl);
 
     postCardsEl.forEach((cardNode, index) => {
+      // movimento per rotazione cards a tot gradi
+      cardNode.addEventListener("mouseover", () => {
+        cardNode.style.transform = "rotate(10deg)";
+      });
+
+      // movimento per rotazione cards in posizione di riposo
+      cardNode.addEventListener("mouseout", () => {
+        cardNode.style.transform = "rotate(0deg)";
+      });
+
       // apertura schermata di overlay
       cardNode.addEventListener("click", () => {
         const cardSelected = document.getElementById("card-selected");
         cardSelected.innerHTML = ``;
         overlay.classList.remove("d-none");
 
+        selectedIndex = index;
+        // scomparsa card in background dopo la comparsa dell'overlay
+        cardNode.classList.add(`d-none`);
+
         // stampa card per visualizzarla nell'overlay
-        cardSelected.innerHTML = createCardPhoto(photos[index]);
+        cardSelected.innerHTML = createCardPhoto(photos[selectedIndex]);
       });
     });
-  });
 
-// chiusura schermata di overlay
-closeOverlay.addEventListener("click", () => {
-  overlay.classList.add("d-none");
-});
+    // chiusura schermata di overlay
+    closeOverlay.addEventListener("click", () => {
+      overlay.classList.add("d-none");
+
+      // ricomparsa card in background dopo la sparizione dell'overlay
+      postCardsEl[selectedIndex].classList.remove("d-none");
+      selectedIndex = -1;
+    });
+  })
+  .catch((error) => {
+    alert("link API non corretto, verificare come è stata scritta l'API");
+  });
