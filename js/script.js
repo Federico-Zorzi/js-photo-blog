@@ -1,3 +1,4 @@
+const numOfCards = 6;
 const pinboardEl = document.getElementById("pinboard");
 const overlay = document.getElementById("overlay");
 const closeOverlay = document.getElementById("close-overlay");
@@ -22,7 +23,7 @@ const createCardPhoto = (photo) => {
           `;
 };
 
-fetch("https://jsonplaceholder.typicode.com/photos?_limit=6")
+fetch(`https://jsonplaceholder.typicode.com/photos?_limit=${numOfCards}`)
   .then((response) => {
     // gestione dell'errore nel caso non funzionasse il collegamento dell'API
     if (response.status !== 200)
@@ -57,7 +58,7 @@ fetch("https://jsonplaceholder.typicode.com/photos?_limit=6")
         // scomparsa card in background dopo la comparsa dell'overlay
         cardNode.classList.add(`d-none`);
 
-        // stampa card per visualizzarla nell'overlay
+        // stampa card nell'overlay
         cardSelected.innerHTML = createCardPhoto(photos[selectedIndex]);
       });
     });
