@@ -1,6 +1,7 @@
 const pinboardEl = document.getElementById("pinboard");
 const overlay = document.getElementById("overlay");
 const closeOverlay = document.getElementById("close-overlay");
+let selectedIndex = -1;
 
 /**
  *
@@ -22,32 +23,30 @@ const createCardPhoto = (photo) => {
 };
 
 fetch("https://jsonplaceholder.typicode.com/photos?_limit=6")
-  .then((response) => response.json())
+  .then((response) => {
+    // gestione dell'errore nel caso non funzionasse il collegamento dell'API
+    if (response.status !== 200)
+      throw new Error(
+        "Errore di comunicazione del server! Riprovare più tardi..."
+      );
+
+    return response.json();
+  })
   .then((photos) => {
     console.log(photos);
 
     // stampa delle cards
     photos.forEach((photo) => {
       pinboardEl.innerHTML += `
-      <div class="col-12 col-md-4">
+      <div class="col-12">
       ${createCardPhoto(photo)}
       </div>`;
     });
 
-    let selectedIndex = -1;
+    // recupero array di nodi delle cards generati precedentemente
     const postCardsEl = document.querySelectorAll("#pinboard .card");
 
     postCardsEl.forEach((cardNode, index) => {
-      // movimento per rotazione cards a tot gradi
-      cardNode.addEventListener("mouseover", () => {
-        cardNode.style.transform = "rotate(10deg)";
-      });
-
-      // movimento per rotazione cards in posizione di riposo
-      cardNode.addEventListener("mouseout", () => {
-        cardNode.style.transform = "rotate(0deg)";
-      });
-
       // apertura schermata di overlay
       cardNode.addEventListener("click", () => {
         const cardSelected = document.getElementById("card-selected");
@@ -73,5 +72,11 @@ fetch("https://jsonplaceholder.typicode.com/photos?_limit=6")
     });
   })
   .catch((error) => {
-    alert("link API non corretto, verificare come è stata scritta l'API");
+    // stampa alert di errore dovuto alla comunicazione del server non ok
+    pinboardEl.innerHTML += `
+    <div class="col-12 ">
+      <div class="alert alert-danger" role="alert">
+      ${error}
+      </div>
+    </div>`;
   });

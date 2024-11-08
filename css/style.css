@@ -30,6 +30,20 @@ h1 {
 #pinboard .card {
   cursor: pointer;
   position: relative;
+
+  box-shadow: 5px 5px 8px -1px;
+}
+
+#pinboard .card:hover {
+  transform: rotate(15deg) scale(1.1, 1.1);
+  transition: all 500ms;
+  z-index: 1;
+
+  box-shadow: 10px 10px 0px 2px;
+}
+
+#pinboard .card:hover .pin {
+  opacity: 0;
 }
 
 .card-text {
@@ -49,10 +63,8 @@ h1 {
 
 #overlay {
   background-color: rgba(0, 0, 0, 0.7);
-  height: 100%;
-  width: 100%;
 
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -61,4 +73,8 @@ h1 {
 
 #overlay .container {
   max-width: 600px;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
 }
